@@ -1,9 +1,9 @@
-2025-11-17 13:30 전현우 ㅡㅡ
+2025-11-17 13:30 이용재
 npm install
 npm install react-router-dom
 npm install axios
 
-2025-11-18 17:00 전현우 ㅡㅡ
+2025-11-18 17:00 이용재
 npm install @fortawesome/fontawesome-svg-core
 npm install @fortawesome/react-fontawesome
 npm install @fortawesome/free-brands-svg-icons
