@@ -397,10 +397,11 @@ html {
 }
 
 .job img {
-  width: 70px;
-  height: 70px;
+  width: min-content;
+  height: min-content;
   border-radius: 8px;
   border: 2px solid var(--color-accent);
+  object-fit: contain;
 }
 
 .job_name {

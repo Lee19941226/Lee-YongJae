@@ -6,11 +6,12 @@ import { Link } from "react-router-dom";
 
 const Main = () => {
   const [codingSkills, setCodingSkills] = useState([
-    { name: "HTML", percentage: 15 },
-    { name: "CSS", percentage: 23 },
-    { name: "JavaScript", percentage: 17 },
-    { name: "React", percentage: 18 },
-    { name: "NodeJs", percentage: 18 },
+    { name: "React", percentage: 75 },
+    { name: "JavaScript", percentage: 70 },
+    { name: "Spring Boot", percentage: 80 },
+    { name: "Java", percentage: 75 },
+    { name: "Oracle & MyBatis", percentage: 70 },
+    { name: "HTML/CSS", percentage: 80 },
   ]);
   // 프로젝트 카테고리
   const projectCategories = [
@@ -28,60 +29,49 @@ const Main = () => {
   const projects = [
     {
       id: 1,
-      title: "Project #1",
-      description: "새미 프로젝트 HTML, CSS",
+      title: "Semi Project",
+      description: "세미 프로젝트 - codePaw",
       image: `${import.meta.env.BASE_URL}profile_images/semi-project.jpg`,
       category: "Team-project",
+      pdfUrl: `${import.meta.env.BASE_URL}pdfs/기획보고서_최종_codePaw.pdf`,
     },
     {
       id: 2,
-      title: "Project #2",
-      description: "파이널 프로젝트 HTML, CSS",
+      title: "Final Project",
+      description: "파이널 프로젝트 - Talk & Deal",
       image: `${import.meta.env.BASE_URL}profile_images/final-project.jpg`,
       category: "Team-project",
+      pdfUrl: `${
+        import.meta.env.BASE_URL
+      }pdfs/FinalProject_최종보고서_Talk & Deal.pdf`,
     },
-    // 나중에 솔로 프로젝트 생기면 이렇게 추가
-    // {
-    //   id: 3,
-    //   title: "Project #3",
-    //   description: "솔로 프로젝트 예시",
-    //   image: "/profile_images/solo-project.jpg",
-    //   category: "Solo-project", // 솔로 프로젝트
-    // },
   ];
   // 선택된 카테고리에 따라 필터링된 프로젝트 목록
   const filteredProjects =
     selectedCategory === "All"
-      ? projects // All이면 전부 다
+      ? projects
       : projects.filter((project) => project.category === selectedCategory);
-  // 만약 선택된 카테고리가 "All" 이면 → projects 배열 전체 사용
-  // 아니면 → project.category 가 "Solo-project" 또는 "Team-project" 인 것만 골라서 사용
 
   // Home 영역 DOM을 직접 가리키기 위한 ref
   const homeRef = useRef(null);
   // Home 섹션을 아래로 스크롤할수록 점점 투명하게 만드는 효과
   useEffect(() => {
     const home = homeRef.current;
-    if (!home) return; // 혹시라도 ref가 연결 안 되어 있으면 종료
-    // Home 영역의 높이(px)
+    if (!home) return;
     const homeHeight = home.offsetHeight;
 
     const handleScroll = () => {
-      // 스크롤 비율에 따라 1 → 0으로 줄어드는 값
       const rawOpacity = 1 - window.scrollY / homeHeight;
-      // 0보다 작아지거나 1보다 커지는 것을 방지하기 위해 0~1로 자르기
       const opacity = Math.max(0, Math.min(1, rawOpacity));
-
       home.style.opacity = opacity;
     };
-    // 스크롤 이벤트 등록
     window.addEventListener("scroll", handleScroll);
 
-    // 컴포넌트가 사라질 때 이벤트 제거
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
   return (
     <main>
       {/* Home Section */}
@@ -89,7 +79,7 @@ const Main = () => {
         <div className="home_container" ref={homeRef}>
           <img
             className="home_avatar"
-            src={`${import.meta.env.BASE_URL}profile_images_Lee-Yong-Jae.jpg`}
+            src={`${import.meta.env.BASE_URL}profile_images/Lee-Yong-Jae.jpg`}
             alt="Profile"
           />
           <h2 className="home_title">
@@ -105,10 +95,7 @@ const Main = () => {
             생각합니다. 작은 기능 하나도 정확히 이해하며 만드는 개발자가 되고
             싶습니다.
           </p>
-          <Link
-            className="home_contact"
-            to="#content" // 푸터(Contact)로 이동
-          >
+          <Link className="home_contact" to="#contact">
             Contact
           </Link>
         </div>
@@ -130,30 +117,34 @@ const Main = () => {
       {/* About Section */}
       <section id="about" className="section max-container">
         <h2 className="title">About Me</h2>
-        <p className="description">내 소개글 작성</p>
+        <p className="description">
+          Spring Boot와 React를 활용한 풀스택 개발 경험을 보유하고 있습니다. 팀
+          프로젝트를 통해 실무 중심의 협업 능력을 키웠습니다.
+        </p>
         <ul className="majors">
           <li className="major">
             <FontAwesomeIcon className="major_icon" icon={faHtml5} />
             <p className="major_title">Front-end</p>
-            <p>HTML , CSS , JavaScript, TypeScript, React </p>
+            <p>React, HTML, CSS, JavaScript</p>
           </li>
           <li className="major">
             <FontAwesomeIcon className="major_icon" icon={faServer} />
-            <p className="major_title"> Back-end</p>
-            <p>Java, JavaScript, Node.js</p>
+            <p className="major_title">Back-end</p>
+            <p>Spring Boot, Node.js, Oracle, MyBatis</p>
           </li>
         </ul>
         <ul className="jobs">
           <li className="job">
             <img src={`${import.meta.env.BASE_URL}profile_images/khlogo.jpg`} />
             <div>
-              <p className="job_name">수료 학생 (KH 정보교육원)</p>
+              <p className="job_name">이 용 재 (KH 교육원)</p>
               <p className="job_period">2025.05.19 ~ 2025.11.04</p>
             </div>
           </li>
         </ul>
       </section>
-      {/* Skills */}
+
+      {/* Skills Section */}
       <section id="skills" className="section">
         <div className="max-container">
           <h2 className="title">My Skills</h2>
@@ -166,9 +157,8 @@ const Main = () => {
                   <li key={index}>
                     <div>
                       <span>{skill.name}</span>
-                      <span>{`${skill.percentage}%`}</span>
+                      <span>{skill.percentage}%</span>
                     </div>
-                    {/* 게이지 바: skill.percentage 값을 style 속성에 동적으로 적용 */}
                     <div>
                       <div style={{ width: `${skill.percentage}%` }}></div>
                     </div>
@@ -180,20 +170,25 @@ const Main = () => {
               <h3 className="skills_title">Tools</h3>
               <ul>
                 <li>Visual Studio Code</li>
-                <li>Intellij</li>
+                <li>Eclipse</li>
+                <li>SQL Developer</li>
               </ul>
             </section>
             <section className="skills_etc">
               <h3 className="skills_title">Etc</h3>
               <ul>
-                <li>Git</li>
+                <li>Git & GitHub</li>
+                <li>Vite</li>
+                <li>Maven</li>
+                <li>Axios</li>
+                <li>Recoil</li>
               </ul>
             </section>
           </div>
         </div>
       </section>
 
-      {/* Work */}
+      {/* Work Section */}
       <section id="work" className="section">
         <div className="max-container">
           <h2 className="title">My Work</h2>
@@ -218,11 +213,14 @@ const Main = () => {
           <ul className="projects">
             {filteredProjects.map((project, index) => (
               <li
-                className="project"
                 key={project.id || `placeholder-${index}`}
+                className="project"
               >
-                {/* 프로젝트 상세 페이지/외부 링크는 a 태그 유지 */}
-                <Link href="#" target="_blank">
+                <a
+                  href={project.pdfUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <img
                     src={project.image}
                     alt={project.title}
@@ -232,7 +230,7 @@ const Main = () => {
                     <h3 className="project_title">{project.title}</h3>
                     <p>{project.description}</p>
                   </div>
-                </Link>
+                </a>
               </li>
             ))}
           </ul>
